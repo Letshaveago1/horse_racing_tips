@@ -8,7 +8,7 @@
   <style>
     #tips-frame {
       width: 100%;
-      height: 90vh;
+      height: 85vh;
       border: none;
       margin-top: 20px;
     }
@@ -35,10 +35,11 @@
     <label for="day-select">Choose a date to view tips:</label>
     <select id="day-select">
       <option value="tips_2025-06-11.html">11 June 2025</option>
-      <!-- Add more options here as you upload more tip files -->
+      <!-- Add more dates like below -->
+      <!-- <option value="tips_2025-06-10.html">10 June 2025</option> -->
     </select>
 
-    <iframe id="tips-frame" src="tips/2025-06-11.html"></iframe>
+    <iframe id="tips-frame" src="tips/tips_2025-06-11.html"></iframe>
   </main>
 
   <footer>
@@ -46,11 +47,8 @@
   </footer>
 
   <script>
-    const dropdown = document.getElementById("day-select");
-    const frame = document.getElementById("tips-frame");
-
-    dropdown.addEventListener("change", function () {
-      frame.src = "tips/" + this.value;
+    document.getElementById("day-select").addEventListener("change", function () {
+      document.getElementById("tips-frame").src = "tips/" + this.value;
     });
   </script>
 </body>
