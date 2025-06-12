@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Today's Tips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Top Metric Selections</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    #tips-frame {
+      width: 100%;
+      height: 90vh;
+      border: none;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -14,19 +22,30 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="bets_accumulator.html">Bets & Accumulator</a></li>
+        <li><a href="tips.html">Today's Tips</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <p>Daily tips will be updated here manually or via automation.</p>
-    <div id="tips-table">
-      <!-- Tips table will be inserted here -->
-    </div>
+    <label for="day-select">Choose a day:</label>
+    <select id="day-select">
+      <option value="tips_2025-06-11.html">11 June 2025</option>
+      <!-- You can add more days here -->
+    </select>
+
+    <iframe id="tips-frame" src="tips/tips_2025-06-11.html"></iframe>
   </main>
 
   <footer>
     <p>&copy; 2025 Horse Racing Tips</p>
   </footer>
+
+  <script>
+    document.getElementById('day-select').addEventListener('change', function () {
+      const selected = this.value;
+      document.getElementById('tips-frame').src = `tips/${selected}`;
+    });
+  </script>
 </body>
 </html>
