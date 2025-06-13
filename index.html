@@ -23,6 +23,30 @@
     <h2>Welcome</h2>
     <p>Click the links above to explore today's tips and betting insights.</p>
   </main>
+<div id="gdrive-data"></div>
+
+<script>
+  fetch('https://script.google.com/macros/s/AKfycbxRHcIVAOp4oBNA1BgJsdCVE8cW5DbYOETpuU3e9sG38psRHHKGPoVrqh8ucl71TMYR/exec')
+    .then(response => response.json())
+    .then(data => {
+      let output = '<table border="1"><tr>';
+      const headers = Object.keys(data[0]);
+      headers.forEach(h => output += `<th>${h}</th>`);
+      output += '</tr>';
+      data.forEach(row => {
+        output += '<tr>';
+        headers.forEach(h => output += `<td>${row[h]}</td>`);
+        output += '</tr>';
+      });
+      output += '</table>';
+      document.getElementById('gdrive-data').innerHTML = output;
+    })
+    .catch(error => {
+      document.getElementById('gdrive-data').textContent = 'Failed to load data: ' + error;
+    });
+</script>
+
+  
   <footer>
     <p>&copy; 2025 Horse Racing Tips</p>
   </footer>
