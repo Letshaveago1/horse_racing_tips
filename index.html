@@ -46,9 +46,23 @@
       headers.forEach(h => output += `<th>${h}</th>`);
       output += '</tr>';
 
+      // Skip the first row of sheet data (assumed to be headers)
       data.slice(1).forEach(row => {
-         output += '<tr>';
-        headers.forEach((h, i) => output += `<td>${row[i]}</td>`);
+        output += '<tr>';
+        headers.forEach((h, i) => {
+          let cell = row[i];
+
+          // 🟡 Apply background color based on confidence
+          if (i === 0) {
+            const color =
+              cell === "Strong" ? "#c8e6c9" : // light green
+              cell === "Medium" ? "#fff9c4" : // light yellow
+              "#ffe0b2"; // light orange
+            cell = `<span style="background-color:${color}; padding:4px; border-radius:4px;">${cell}</span>`;
+          }
+
+          output += `<td>${cell}</td>`;
+        });
         output += '</tr>';
       });
 
@@ -59,6 +73,7 @@
       document.getElementById('gdrive-data').textContent = 'Failed to load data: ' + error;
     });
 </script>
+
 
 
   
