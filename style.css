@@ -1,283 +1,49 @@
+/* Reset and body styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  padding-top: 60px; /* Space for fixed navbar */
 }
 
+/* HEADER & NAV */
 header {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 0;
-  text-align: center;
-}
-
-header h1 {
-  margin: 0;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-}
-
-nav ul li {
-  display: inline;
-  margin: 0 15px;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-main {
-  flex: 1;
-  padding-bottom: 80px; /* Make room for footer */
-}
-
-footer {
-  background-color: #f8f8f8;
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 0.9rem;
-  color: #333;
-  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
-}
-.hero-banner {
-  background-image: url('images/results-banner.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-  position: relative;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.hero-content {
-  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
-  padding: 20px;
-  border-radius: 12px;
-}
-
-.page-banner {
-  width: 100%;
-  height: 250px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  z-index: 0;
-  margin-top: 0px; /* tweak if there's extra spacing */
-}
-
-.banner-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
-  height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.3); /* Optional: subtle overlay */
-  z-index: 1;
-}
-
-.page-banner {
-  width: 100%;
-  height: 300px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  background-color: #000;
   color: white;
-}
-
-.banner-overlay {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* subtle dark overlay */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.page-banner h1 {
-  font-size: 2.5em;
-  margin: 10px 0;
-  color: white;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 10px 20px;
-  border-radius: 10px;
-}
-
-.page-banner nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0;
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.page-banner nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.2em;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 8px 15px;
-  border-radius: 8px;
-  transition: background 0.3s;
-}
-
-.page-banner nav ul li a:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-/* Float navbar + page title over banner */
-header {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -30%);
-  background-color: rgba(0, 0, 0, 0.4);
-  padding: 20px 40px;
-  border-radius: 12px;
-  text-align: center;
-  z-index: 2;
-  width: auto;
-  max-width: 90%;
-  color: #fff;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2em;
-  color: white;
+  z-index: 1000;
+  padding: 10px 0;
 }
 
 nav ul {
-  list-style-type: none;
-  padding: 0;
+  list-style: none;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
 }
 
 nav li a {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  background-color: rgba(255,255,255,0.1);
-  padding: 8px 12px;
+  padding: 8px 14px;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   transition: background 0.3s ease;
 }
 
 nav li a:hover {
-  background-color: rgba(255,255,255,0.3);
-}
-
-/* Banner */
-.page-banner {
-  height: 300px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.banner-overlay {
-  background-color: rgba(0, 0, 0, 0.3);
-  height: 100%;
-  width: 100%;
-  position: absolute;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9em;
-  background: #222;
-  color: white;
-}
-
-/* Main content area */
-main {
-  padding: 20px;
-  margin-top: 320px; /* Make room for fixed header/banner */
-}
-
-/* Responsive tweaks for mobile */
-@media screen and (max-width: 768px) {
-  header {
-    top: 20%;
-    padding: 15px;
-  }
-
-  header h1 {
-    font-size: 1.5em;
-  }
-
-  nav ul {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .page-banner {
-    height: 220px;
-  }
-
-  main {
-    margin-top: 240px;
-    padding: 15px;
-  }
-}
-
-/* HEADER & NAVIGATION */
-header {
-  background-color: #000;
-  color: white;
-  padding: 10px 0;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 999;
-}
-
-nav ul {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav li {
-  margin: 0 15px;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* SPACING TO PUSH PAGE DOWN BELOW FIXED HEADER */
-body {
-  padding-top: 70px; /* Adjust based on header height */
-  margin: 0;
-  font-family: Arial, sans-serif;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 /* PAGE BANNER */
@@ -286,24 +52,52 @@ body {
   height: 300px;
   background-size: cover;
   background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 30px;
 }
 
 .page-banner h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  font-size: 2.5em;
   color: white;
   text-shadow: 2px 2px 5px black;
-  font-size: 2.5em;
-  margin: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+
+/* MAIN CONTENT */
+main {
+  padding: 20px;
 }
 
 /* FOOTER */
 footer {
   text-align: center;
   padding: 20px;
-  background: #f0f0f0;
+  background: #222;
+  color: white;
+  font-size: 0.9em;
 }
 
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .page-banner {
+    height: 220px;
+  }
+
+  .page-banner h1 {
+    font-size: 1.8em;
+    padding: 10px 16px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  body {
+    padding-top: 100px;
+  }
+}
