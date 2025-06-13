@@ -3,10 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Top Metric Selection</title>
+  <title>Top Metric Selections</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    label, select {
+      font-size: 1.1em;
+      margin: 15px 10px;
+    }
+
+    #tips-frame {
+      width: 100%;
+      height: 85vh;
+      border: none;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
+
   <header>
     <nav>
       <ul>
@@ -20,20 +34,18 @@
   </header>
 
   <div class="page-banner" style="background-image: url('images/tips-banner.jpg');">
-    <h1>Top Metric Selection</h1>
+    <h1>Top Metric Selections</h1>
   </div>
 
   <main>
     <label for="day-select">Choose a date to view tips:</label>
-    <select id="day-select">
-      <option value="tips_2025-06-11.html">11 June 2025</option>
-      <option value="tips_2025-06-10.html">10 June 2025</option>
-      <option value="tips_2025-06-12.html">12 June 2025</option>
-      <!-- Add more dates like below -->
-      <!-- <option value="tips_2025-06-10.html">10 June 2025</option> -->
+    <select id="day-select" onchange="loadTips(this.value)">
+      <option value="tips_2025-06-10.html">June 10, 2025</option>
+      <option value="tips_2025-06-11.html">June 11, 2025</option>
+      <!-- Add more options as needed -->
     </select>
 
-    <iframe id="tips-frame" src="tips/tips_2025-06-11.html"></iframe>
+    <iframe id="tips-frame" src="tips_2025-06-10.html"></iframe>
   </main>
 
   <footer>
@@ -41,9 +53,10 @@
   </footer>
 
   <script>
-    document.getElementById("day-select").addEventListener("change", function () {
-      document.getElementById("tips-frame").src = "tips/" + this.value;
-    });
+    function loadTips(filename) {
+      document.getElementById('tips-frame').src = filename;
+    }
   </script>
+
 </body>
 </html>
