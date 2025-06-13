@@ -29,15 +29,29 @@
   fetch('https://script.google.com/macros/s/AKfycbxRHcIVAOp4oBNA1BgJsdCVE8cW5DbYOETpuU3e9sG38psRHHKGPoVrqh8ucl71TMYR/exec')
     .then(response => response.json())
     .then(data => {
+      const headers = [
+        "🔥 Confidence",
+        "📍 Course",
+        "⏰ Off Time",
+        "🏇 Horse",
+        "💰 Odds",
+        "🏁 Result",
+        "💵 Profit",
+        "📊 Super Score",
+        "📈 Weighted Score",
+        "🎯 Rank"
+      ];
+
       let output = '<table border="1"><tr>';
-      const headers = Object.keys(data[0]);
       headers.forEach(h => output += `<th>${h}</th>`);
       output += '</tr>';
+
       data.forEach(row => {
         output += '<tr>';
-        headers.forEach(h => output += `<td>${row[h]}</td>`);
+        headers.forEach((h, i) => output += `<td>${row[i]}</td>`);
         output += '</tr>';
       });
+
       output += '</table>';
       document.getElementById('gdrive-data').innerHTML = output;
     })
@@ -45,6 +59,7 @@
       document.getElementById('gdrive-data').textContent = 'Failed to load data: ' + error;
     });
 </script>
+
 
   
   <footer>
