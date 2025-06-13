@@ -45,3 +45,21 @@ footer {
   color: #333;
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
 }
+.hero-banner {
+  background-image: url('images/results-banner.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+  padding: 20px;
+  border-radius: 12px;
+}
