@@ -46,8 +46,8 @@
       headers.forEach(h => output += `<th>${h}</th>`);
       output += '</tr>';
 
-      data.forEach(row => {
-        output += '<tr>';
+      data.slice(1).forEach(row => {
+         output += '<tr>';
         headers.forEach((h, i) => output += `<td>${row[i]}</td>`);
         output += '</tr>';
       });
