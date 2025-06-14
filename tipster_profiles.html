@@ -5,57 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tipster Profiles</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .tipsters-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .ai-style-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 1rem;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.2s;
-      font-family: 'Arial', sans-serif;
-    }
-
-    .ai-style-card:hover {
-      transform: scale(1.02);
-    }
-
-    .tipster-img {
-      width: 100%;
-      height: 220px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 12px;
-      margin-bottom: 0.5rem;
-    }
-
-    .ai-style-card h4 {
-      font-size: 1.2rem;
-      margin: 0.5rem 0 0.2rem;
-    }
-
-    .ai-style-card .persona {
-      font-size: 0.85rem;
-      color: #666;
-      margin-bottom: 0.8rem;
-    }
-
-    .ai-style-card .stats p {
-      margin: 0.25rem 0;
-      font-size: 0.9rem;
-    }
-
-    .stat {
-      font-weight: bold;
-      color: #111;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -66,12 +15,12 @@
         <li><a href="bets_accumulator.html">Bets & Accumulator</a></li>
         <li><a href="tips.html">Today's Tips</a></li>
         <li><a href="results.html">Results</a></li>
-        <li><a href="tipster_profiles.html">Tipster_Profiles</a></li>
+        <li><a href="tipster_profiles.html">Tipster Profiles</a></li>
       </ul>
     </nav>
   </header>
 
-  <div class="page-banner" style="background-image: url('../images/home_banner_1.jpg');">
+  <div class="page-banner" style="background-image: url('images/home_banner_1.jpg');">
     <h1>Tipster Profiles</h1>
   </div>
 
@@ -89,29 +38,29 @@
 
   <script>
     const tipsters = [
-      "Bitwise81", "Patch36", "Echo161", "Core449", "Fractal153", "Nova98", "Byte10", "Grid56", "Cipher75", "Prime51", "Shock109", "Max63", "Sneak9", "Zebra37",
+      "Bitwise81", "Patch36", "Echo161", "Core449", "Fractal153", "Nova98", "Byte10",
+      "Grid56", "Cipher75", "Prime51", "Shock109", "Max63", "Sneak9", "Zebra37"
     ];
 
     const personas = [
       "Precise, logical decision-maker", "Fixes gaps, strong in missing data", "AI with tactical flair",
       "Rapid-fire selections, high volatility", "Emotionally attuned analyst",
       "Focuses on favourite patterns", "Uses voice-of-the-crowd weighting", "Historical data enthusiast",
-      "Gamble-friendly pick bias", "Sharp angles on long shots",
-      "Pattern matcher and optimizer", "Risk-averse, banker-biased", "Data scout with hidden gem bias",
-      "Momentum tracker and finisher", "Multimodal hybrid algorithm"
+      "Gamble-friendly pick bias", "Sharp angles on long shots", "Pattern matcher and optimizer",
+      "Risk-averse, banker-biased", "Data scout with hidden gem bias", "Momentum tracker and finisher"
     ];
 
     const container = document.getElementById('tipster-grid');
 
     tipsters.forEach((name, index) => {
       const persona = personas[index] || "AI-assisted tipster";
-      const image = `../images/tipsters/${name.toLowerCase()}.jpg`;
-0
+      const imgSrc = `images/tipsters/${name.toLowerCase()}.jpg`;
+
       const card = document.createElement('div');
-      card.className = 'ai-style-card';
+      card.className = 'tipster-card';
 
       card.innerHTML = `
-        <div class="tipster-img" style="background-image: url('${image}');"></div>
+        <img src="${imgSrc}" alt="${name}" />
         <h4>${name}</h4>
         <p class="persona">"${persona}"</p>
         <div class="stats">
@@ -124,19 +73,23 @@
       container.appendChild(card);
     });
 
-    // Live data from Google Sheets
+    // ✅ Replace with your actual Google Apps Script URL
     fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec')
       .then(res => res.json())
       .then(data => {
-        // Assumes data rows in order: name, win%, tips, profit
         data.slice(1).forEach(row => {
           const [binary, decimal, name, persona, img, tips, wins, odds, winPerc, profit] = row;
           if (!name) return;
-          const normName = name.replace(/\s+/g, '');
-          if (document.getElementById(`${normName}_win`)) {
-            document.getElementById(`${normName}_win`).textContent = winPerc + '%';
-            document.getElementById(`${normName}_tips`).textContent = tips;
-            document.getElementById(`${normName}_profit`).textContent = profit;
+          const cleanName = name.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '');
+
+          const winEl = document.getElementById(`${cleanName}_win`);
+          const tipEl = document.getElementById(`${cleanName}_tips`);
+          const profEl = document.getElementById(`${cleanName}_profit`);
+
+          if (winEl && tipEl && profEl) {
+            winEl.textContent = winPerc + '%';
+            tipEl.textContent = tips;
+            profEl.textContent = profit;
           }
         });
       })
