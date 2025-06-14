@@ -5,6 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tipster Profiles</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .tipster-card {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .tipster-card:hover {
+      transform: scale(1.03);
+    }
+
+    .tipster-card.top-tipster {
+      border: 3px solid gold;
+      background-color: #fffbe6;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .badge.plus20 { background: #d4af37; } /* bronze */
+    .badge.plus30 { background: #c0c0c0; } /* silver */
+    .badge.plus50 { background: #ffd700; } /* gold */
+    .badge.plus100 { background: #e60000; } /* red premium */
+    .badge.highwin { background: #007bff; } /* blue badge */
+  </style>
 </head>
 <body>
   <header>
@@ -78,6 +114,16 @@
         const imgSrc = `images/tipsters/${name.toLowerCase()}.jpg`;
         const isTop = index === 0;
 
+        const badges = [];
+        if (stats.profit >= 100) badges.push('<span class="badge plus100">+100 Units</span>');
+        else if (stats.profit >= 50) badges.push('<span class="badge plus50">+50 Units</span>');
+        else if (stats.profit >= 30) badges.push('<span class="badge plus30">+30 Units</span>');
+        else if (stats.profit >= 20) badges.push('<span class="badge plus20">+20 Units</span>');
+
+        if (stats.winPerc && stats.winPerc >= 0.25) {
+          badges.push('<span class="badge highwin">High Win%</span>');
+        }
+
         const card = document.createElement('div');
         card.className = 'tipster-card' + (isTop ? ' top-tipster' : '');
 
@@ -93,6 +139,9 @@
           <div class="daily-tips">
             <strong>Today's Tips:</strong><br/>
             <span>${stats.dailyTips || 'No selections yet'}</span>
+          </div>
+          <div class="badges">
+            ${badges.join(' ')}
           </div>
         `;
 
