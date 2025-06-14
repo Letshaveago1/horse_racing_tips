@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us</title>
+  <title>Bets & Accumulator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -26,56 +25,59 @@
 
   <main>
     <p>Here you'll find high-confidence accumulator combinations and best-value betting suggestions updated daily.</p>
+
+    <!-- ✅ This is what was missing -->
+    <div id="gdrive-data"></div>
   </main>
 
+  <!-- ✅ Script works now because #gdrive-data exists -->
   <script>
-  fetch('https://script.google.com/macros/s/AKfycbxRHcIVAOp4oBNA1BgJsdCVE8cW5DbYOETpuU3e9sG38psRHHKGPoVrqh8ucl71TMYR/exec')
-    .then(response => response.json())
-    .then(data => {
-      const headers = [
-        "🔥 Confidence",
-        "📍 Course",
-        "⏰ Off Time",
-        "🏇 Horse",
-        "💰 Odds",
-        "🏁 Result",
-        "💵 Profit",
-        "📊 Super Score",
-        "📈 Weighted Score",
-        "🎯 Rank"
-      ];
+    fetch('https://script.google.com/macros/s/AKfycbxRHcIVAOp4oBNA1BgJsdCVE8cW5DbYOETpuU3e9sG38psRHHKGPoVrqh8ucl71TMYR/exec')
+      .then(response => response.json())
+      .then(data => {
+        const headers = [
+          "🔥 Confidence",
+          "📍 Course",
+          "⏰ Off Time",
+          "🏇 Horse",
+          "💰 Odds",
+          "🏁 Result",
+          "💵 Profit",
+          "📊 Super Score",
+          "📈 Weighted Score",
+          "🎯 Rank"
+        ];
 
-      let output = '<table border="1"><tr>';
-      headers.forEach(h => output += `<th>${h}</th>`);
-      output += '</tr>';
-
-      // Skip the first row of sheet data (assumed to be headers)
-      data.slice(1).forEach(row => {
-        output += '<tr>';
-        headers.forEach((h, i) => {
-          let cell = row[i];
-
-          // 🟡 Apply background color based on confidence
-          if (i === 0) {
-            const color =
-              cell === "Strong" ? "#c8e6c9" : // light green
-              cell === "Medium" ? "#fff9c4" : // light yellow
-              "#ffe0b2"; // light orange
-            cell = `<span style="background-color:${color}; padding:4px; border-radius:4px;">${cell}</span>`;
-          }
-
-          output += `<td>${cell}</td>`;
-        });
+        let output = '<table border="1"><tr>';
+        headers.forEach(h => output += `<th>${h}</th>`);
         output += '</tr>';
-      });
 
-      output += '</table>';
-      document.getElementById('gdrive-data').innerHTML = output;
-    })
-    .catch(error => {
-      document.getElementById('gdrive-data').textContent = 'Failed to load data: ' + error;
-    });
-</script>
+        data.slice(1).forEach(row => {
+          output += '<tr>';
+          headers.forEach((h, i) => {
+            let cell = row[i];
+
+            if (i === 0) {
+              const color =
+                cell === "Strong" ? "#c8e6c9" :
+                cell === "Medium" ? "#fff9c4" :
+                "#ffe0b2";
+              cell = `<span style="background-color:${color}; padding:4px; border-radius:4px;">${cell}</span>`;
+            }
+
+            output += `<td>${cell}</td>`;
+          });
+          output += '</tr>';
+        });
+
+        output += '</table>';
+        document.getElementById('gdrive-data').innerHTML = output;
+      })
+      .catch(error => {
+        document.getElementById('gdrive-data').textContent = 'Failed to load data: ' + error;
+      });
+  </script>
+
   <footer>
     <p>&copy; 2025 Horse Racing Tips</p>
   </footer>
