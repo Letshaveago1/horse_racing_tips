@@ -26,6 +26,7 @@
 
   <main class="homepage">
     <section class="tipster-profiles">
+      <button id="refresh-btn">🔄 Refresh Stats</button>
       <div class="tipsters-grid" id="tipster-grid">
         <!-- Tipster cards will be injected here -->
       </div>
@@ -52,54 +53,65 @@
 
     const container = document.getElementById('tipster-grid');
 
-    tipsters.forEach((name, index) => {
-      const persona = personas[index] || "AI-assisted tipster";
-      const imgSrc = `images/tipsters/${name.toLowerCase()}.jpg`;
+    function renderTipsters(data = []) {
+      container.innerHTML = '';
+      const tipsterStats = {};
+      data.forEach(row => {
+        const [binary, decimal, name, persona, img, tips, wins, odds, winPerc, profit, dailyTips] = row;
+        if (!name) return;
+        const cleanName = name.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '');
+        tipsterStats[cleanName] = {
+          tips, wins, winPerc: parseFloat(winPerc), profit: parseFloat(profit), dailyTips
+        };
+      });
 
-      const card = document.createElement('div');
-      card.className = 'tipster-card';
+      const sortedTipsters = tipsters.sort((a, b) => {
+        const statA = tipsterStats[a] ? tipsterStats[a].winPerc : 0;
+        const statB = tipsterStats[b] ? tipsterStats[b].winPerc : 0;
+        return statB - statA;
+      });
 
-      card.innerHTML = `
-        <img src="${imgSrc}" alt="${name}" />
-        <h4>${name}</h4>
-        <p class="persona">"${persona}"</p>
-        <div class="stats">
-          <p>🏆 Win %: <span class="stat" id="${name}_win">--</span></p>
-          <p>📈 Tips: <span class="stat" id="${name}_tips">--</span></p>
-          <p>💰 Profit: <span class="stat" id="${name}_profit">--</span></p>
-        </div>
-      `;
+      sortedTipsters.forEach((name, index) => {
+        const cleanName = name.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '');
+        const stats = tipsterStats[cleanName] || {};
+        const persona = personas[index] || "AI-assisted tipster";
+        const imgSrc = `images/tipsters/${name.toLowerCase()}.jpg`;
+        const isTop = index === 0;
 
-      container.appendChild(card);
+        const card = document.createElement('div');
+        card.className = 'tipster-card' + (isTop ? ' top-tipster' : '');
+
+        card.innerHTML = `
+          <img src="${imgSrc}" alt="${name}" title="${persona}" />
+          <h4>${name}</h4>
+          <p class="persona">"${persona}"</p>
+          <div class="stats">
+            <p title="Win percentage">🏆 Win %: <span class="stat">${stats.winPerc ? (stats.winPerc * 100).toFixed(0) + '%' : 'No data yet'}</span></p>
+            <p title="Total tips made">📈 Tips: <span class="stat">${stats.tips || 'No data yet'}</span></p>
+            <p title="Total profit">💰 Profit: <span class="stat">${typeof stats.profit === 'number' ? stats.profit.toFixed(2) : 'No data yet'}</span></p>
+          </div>
+          <div class="daily-tips">
+            <strong>Today's Tips:</strong><br/>
+            <span>${stats.dailyTips || 'No selections yet'}</span>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function fetchStatsAndRender() {
+      fetch('https://script.google.com/macros/s/AKfycbw5cLM0xo607DHpe8S6G0u6M4CBIe70zGpDlV3kFTAXlgKB-rJ--UtHCRpQn8yn8nmDYQ/exec')
+        .then(res => res.json())
+        .then(data => renderTipsters(data.slice(1)))
+        .catch(err => console.error('Error fetching live tipster data:', err));
+    }
+
+    document.getElementById('refresh-btn').addEventListener('click', () => {
+      fetchStatsAndRender();
     });
 
-    // ✅ Replace with your actual Google Apps Script URL
-    fetch('https://script.google.com/macros/s/AKfycbw5cLM0xo607DHpe8S6G0u6M4CBIe70zGpDlV3kFTAXlgKB-rJ--UtHCRpQn8yn8nmDYQ/exec')
-      .then(res => res.json())
-      .then(data => {
-        data.slice(1).forEach(row => {
-          const [binary, decimal, name, persona, img, tips, wins, odds, winPerc, profit] = row;
-          if (!name) return;
-          const cleanName = name.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '');
-
-          const winEl = document.getElementById(`${cleanName}_win`);
-          const tipEl = document.getElementById(`${cleanName}_tips`);
-          const profEl = document.getElementById(`${cleanName}_profit`);
-
-          if (winEl && tipEl && profEl) {
-          const formattedWin = (parseFloat(winPerc) * 100).toFixed(0) + '%';
-          const formattedProfit = parseFloat(profit).toFixed(2);
-
-          winEl.textContent = formattedWin;
-          tipEl.textContent = tips;
-          profEl.textContent = formattedProfit;
-}
-
-        });
-      })
-      .catch(err => {
-        console.error('Error fetching live tipster data:', err);
-      });
+    fetchStatsAndRender();
   </script>
 </body>
 </html>
