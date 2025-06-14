@@ -20,7 +20,7 @@ header {
   background-color: #000;
   color: white;
   z-index: 1000;
-  padding: 0px 0 0 0; /* 🔧 CHANGED: Removed bottom padding to reduce white gap */
+  padding: 10px 0 0 0; /* 🔧 CHANGED: Removed bottom padding to reduce white gap */
 }
 
 nav ul {
