@@ -87,10 +87,14 @@
           const profEl = document.getElementById(`${cleanName}_profit`);
 
           if (winEl && tipEl && profEl) {
-            winEl.textContent = winPerc + '%';
-            tipEl.textContent = tips;
-            profEl.textContent = profit;
-          }
+          const formattedWin = (parseFloat(winPerc) * 100).toFixed(0) + '%';
+          const formattedProfit = parseFloat(profit).toFixed(2);
+
+          winEl.textContent = formattedWin;
+          tipEl.textContent = tips;
+          profEl.textContent = formattedProfit;
+}
+
         });
       })
       .catch(err => {
