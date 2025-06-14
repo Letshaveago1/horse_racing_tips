@@ -103,3 +103,63 @@ footer {
     padding-top: 100px; /* 🔧 Make sure this still matches mobile header height */
   }
 }
+
+.homepage {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.tipster-profiles {
+  margin-top: 2rem;
+}
+
+.tipsters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.tipster-card {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.tipster-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.explore-cta {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.cta-buttons {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cta-buttons .button {
+  padding: 0.75rem 1.5rem;
+  background-color: #444;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.cta-buttons .button:hover {
+  background-color: #222;
+}
+
