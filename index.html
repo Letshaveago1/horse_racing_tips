@@ -24,60 +24,68 @@
     <h1>Horse Racing Tips</h1>
   </div>
 
-  <main>
-    <h2>Welcome</h2>
-    <p>Click the links above to explore today's tips and betting insights.Site under construction please bare with me lots more to come!!!</p>
-    </main>
-<div id="gdrive-data"></div>
+<main class="homepage">
 
-<script>
-  fetch('https://script.google.com/macros/s/AKfycbxRHcIVAOp4oBNA1BgJsdCVE8cW5DbYOETpuU3e9sG38psRHHKGPoVrqh8ucl71TMYR/exec')
-    .then(response => response.json())
-    .then(data => {
-      const headers = [
-        "🔥 Confidence",
-        "📍 Course",
-        "⏰ Off Time",
-        "🏇 Horse",
-        "💰 Odds",
-        "🏁 Result",
-        "💵 Profit",
-        "📊 Super Score",
-        "📈 Weighted Score",
-        "🎯 Rank"
-      ];
+  <!-- 👋 Welcome Message -->
+  <section class="welcome">
+    <h2>Welcome to the Future of Horse Racing Tips</h2>
+    <p>
+      This site is powered by over 15 months of AI-generated tipping data. 
+      Each AI model brings a unique perspective, trained on thousands of races to identify value, confidence, and edge. 
+      Whether you're building your daily bets or crafting smart accumulators, you're in the right place.
+    </p>
+  </section>
 
-      let output = '<table border="1"><tr>';
-      headers.forEach(h => output += `<th>${h}</th>`);
-      output += '</tr>';
+  <!-- 🧠 Meet the AI Tipsters -->
+  <section class="tipster-profiles">
+    <h3>Meet the AI Tipsters</h3>
+    <div class="tipsters-grid">
 
-      // Skip the first row of sheet data (assumed to be headers)
-      data.slice(1).forEach(row => {
-        output += '<tr>';
-        headers.forEach((h, i) => {
-          let cell = row[i];
+      <!-- 🔮 Tipster 1 -->
+      <div class="tipster-card">
+        <img src="images/tipsters/bitwise81.jpg" alt="Bitwise81 - Logical AI Tipster" />
+        <h4>Bitwise81</h4>
+        <p>Precise, logical, and brutally efficient. Tracks long-term patterns and thrives on consistency.</p>
+      </div>
 
-          // 🟡 Apply background color based on confidence
-          if (i === 0) {
-            const color =
-              cell === "Strong" ? "#c8e6c9" : // light green
-              cell === "Medium" ? "#fff9c4" : // light yellow
-              "#ffe0b2"; // light orange
-            cell = `<span style="background-color:${color}; padding:4px; border-radius:4px;">${cell}</span>`;
-          }
+      <!-- 🧩 Tipster 2 -->
+      <div class="tipster-card">
+        <img src="images/tipsters/patch36.jpg" alt="Patch36 - Data gap filler" />
+        <h4>Patch36</h4>
+        <p>Fills gaps and finds overlooked value. Designed to spot what others miss in the data chaos.</p>
+      </div>
 
-          output += `<td>${cell}</td>`;
-        });
-        output += '</tr>';
-      });
+      <!-- 🧠 Tipster 3 Placeholder -->
+      <div class="tipster-card">
+        <img src="images/tipsters/placeholder.jpg" alt="Future AI Tipster" />
+        <h4>[Your Next AI]</h4>
+        <p>Placeholder for a new model in development. Stay tuned for more unique tipster personalities.</p>
+      </div>
 
-      output += '</table>';
-      document.getElementById('gdrive-data').innerHTML = output;
-    })
-    .catch(error => {
-      document.getElementById('gdrive-data').textContent = 'Failed to load data: ' + error;
-    });
-</script>
+    </div>
+
+    <!-- 📌 Instructions for image placeholders -->
+    <p style="font-size: 0.85em; color: #555; margin-top: 10px;">
+      📷 To update tipster images, place JPG or PNG files in <code>/images/tipsters/</code> with names like <code>bitwise81.jpg</code>. Use <strong>realistic AI-generated portrait images</strong> (no text), styled for professionalism. 
+      <br><br>
+      💡 <em>Image prompt example:</em><br>
+      <code>"Realistic AI-generated profile portrait of a sharp data analyst, neutral background, professional tone, cinematic lighting"</code>
+    </p>
+  </section>
+
+  <!-- 🚀 Call to Action -->
+  <section class="explore-cta">
+    <h3>Ready to Start Winning?</h3>
+    <p>Explore today's tips, check our latest results, or view recommended accumulator bets.</p>
+    <div class="cta-buttons">
+      <a href="tips.html" class="button">View Today's Tips</a>
+      <a href="bets_accumulator.html" class="button">Accumulator Picks</a>
+      <a href="results.html" class="button">Latest Results</a>
+    </div>
+  </section>
+
+</main>
+
 
 
 
