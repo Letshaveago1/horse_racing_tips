@@ -25,6 +25,11 @@
       background-color: #fffbe6;
     }
 
+    .tipster-card.double-badge {
+      outline: 3px dashed #444;
+      outline-offset: -6px;
+    }
+
     .badge {
       display: inline-block;
       margin-top: 5px;
@@ -115,17 +120,25 @@
         const isTop = index === 0;
 
         const badges = [];
-        if (stats.profit >= 100) badges.push('<span class="badge plus100">+100 Units</span>');
-        else if (stats.profit >= 50) badges.push('<span class="badge plus50">+50 Units</span>');
-        else if (stats.profit >= 30) badges.push('<span class="badge plus30">+30 Units</span>');
-        else if (stats.profit >= 20) badges.push('<span class="badge plus20">+20 Units</span>');
+        let hasProfitBadge = false;
+        let hasHighWin = false;
+
+        if (stats.profit >= 100) { badges.push('<span class="badge plus100">+100 Units</span>'); hasProfitBadge = true; }
+        else if (stats.profit >= 50) { badges.push('<span class="badge plus50">+50 Units</span>'); hasProfitBadge = true; }
+        else if (stats.profit >= 30) { badges.push('<span class="badge plus30">+30 Units</span>'); hasProfitBadge = true; }
+        else if (stats.profit >= 20) { badges.push('<span class="badge plus20">+20 Units</span>'); hasProfitBadge = true; }
 
         if (stats.winPerc && stats.winPerc >= 0.25) {
           badges.push('<span class="badge highwin">High Win%</span>');
+          hasHighWin = true;
         }
 
         const card = document.createElement('div');
         card.className = 'tipster-card' + (isTop ? ' top-tipster' : '');
+
+        if (hasProfitBadge && hasHighWin) {
+          card.classList.add('double-badge');
+        }
 
         card.innerHTML = `
           <img src="${imgSrc}" alt="${name}" title="${persona}" />
