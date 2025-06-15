@@ -8,8 +8,7 @@
 body {
   font-family: Arial, sans-serif;
   background: #fff;
-  padding-top: 60px; /* Space for fixed navbar */
-  /* 🔧 No change here, but make sure this matches your actual header height */
+  padding-top: 100px; /* Leave space for fixed header */
 }
 
 /* HEADER & NAV */
@@ -19,32 +18,108 @@ header {
   width: 100%;
   background-color: #000;
   color: white;
-  z-index: 1000;
-  padding: 10px 0 0 0; /* 🔧 CHANGED: Removed bottom padding to reduce white gap */
+  z-index: 1500;
+  padding: 10px 0;
 }
 
-nav ul {
-  list-style: none;
+.nav-container {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
-  padding: 0;
-  margin: 0;
 }
 
-nav li a {
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 10px;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a,
+.dropbtn {
   color: white;
   text-decoration: none;
-  font-weight: bold;
-  padding: 8px 14px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  transition: background 0.3s ease;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-nav li a:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+.nav-links a:hover,
+.dropbtn:hover {
+  background-color: #444;
+  border-radius: 6px;
+}
+
+/* Dropdown Styling */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  min-width: 220px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 2000;
+  flex-direction: column;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-content a:hover {
+  background-color: #555;
+}
+
+.dropdown-content img {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+/* JS controlled class */
+.show {
+  display: flex !important;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #222;
+  }
+
+  .nav-links.mobile-show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
 }
 
 /* PAGE BANNER */
@@ -57,7 +132,8 @@ nav li a:hover {
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
-  overflow: hidden; /* 🔧 ADDED: Prevent image overflow issues */
+  overflow: hidden;
+  z-index: 1;
 }
 
 .page-banner h1 {
@@ -72,36 +148,6 @@ nav li a:hover {
 /* MAIN CONTENT */
 main {
   padding: 20px;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #222;
-  color: white;
-  font-size: 0.9em;
-}
-
-/* RESPONSIVE */
-@media screen and (max-width: 768px) {
-  .page-banner {
-    height: 220px;
-  }
-
-  .page-banner h1 {
-    font-size: 1.8em;
-    padding: 10px 16px;
-  }
-
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  body {
-    padding-top: 100px; /* 🔧 Make sure this still matches mobile header height */
-  }
 }
 
 .homepage {
@@ -163,176 +209,11 @@ footer {
   background-color: #222;
 }
 
-/* Dropdown container */
-nav ul li.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Navbar Styling */
-.navbar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  background-color: #333;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.navbar li {
-  float: left;
-  position: relative;
-}
-
-.navbar li a,
-.dropbtn {
-  display: block;
-  color: white;
+/* FOOTER */
+footer {
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  background-color: #333;
-}
-
-.navbar li a:hover,
-.dropdown:hover .dropbtn {
-  background-color: #555;
-}
-
-/* Dropdown container */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #444;
-  min-width: 180px;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  z-index: 1;
-  top: 100%;
-  left: 0;
-}
-
-.dropdown-content a {
+  padding: 20px;
+  background: #222;
   color: white;
-  padding: 10px 14px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.dropdown-content a:hover {
-  background-color: #666;
-}
-
-/* Base nav layout */
-.navbar {
-  background-color: #222;
-  padding: 0.5rem;
-  color: white;
-}
-
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 10px;
-}
-
-.nav-links li {
-  position: relative;
-}
-
-.nav-links a,
-.dropbtn {
-  color: white;
-  text-decoration: none;
-  padding: 10px 14px;
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.nav-links a:hover,
-.dropbtn:hover {
-  background-color: #444;
-}
-
-/* Dropdown Content */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #333;
-  min-width: 220px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  z-index: 999;
-  flex-direction: column;
-}
-
-.dropdown-content a {
-  color: white;
-  padding: 10px 14px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.dropdown-content a:hover {
-  background-color: #555;
-}
-
-.dropdown-content img {
-  width: 24px;
-  height: 24px;
-  object-fit: cover;
-  border-radius: 3px;
-}
-
-.show {
-  display: flex !important;
-}
-
-/* Hamburger */
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background-color: #222;
-  }
-
-  .nav-links.mobile-show {
-    display: flex;
-  }
-
-  .hamburger {
-    display: block;
-  }
-
-  .dropdown-content {
-    position: static;
-  }
-}
-
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
+  font-size: 0.9em;
 }
