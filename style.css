@@ -169,57 +169,63 @@ nav ul li.dropdown {
   display: inline-block;
 }
 
-/* Dropdown button */
-nav ul li.dropdown .dropbtn {
-  background: none;
-  border: none;
-  color: #fff; /* or your nav text color */
-  cursor: pointer;
-  font-size: 1em;
-  padding: 10px 15px;
-}
-
-/* Dropdown content - hidden by default */
-nav ul li.dropdown .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #222; /* dark background */
-  min-width: 180px;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
-  z-index: 1000;
-  border-radius: 4px;
-}
-
-/* Show dropdown on hover */
-nav ul li.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Links inside dropdown */
-nav ul li.dropdown .dropdown-content a {
-  color: white;
-  padding: 8px 12px;
-  text-decoration: none;
+/* Navbar Styling */
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+  overflow: hidden;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid #444;
+  flex-wrap: wrap;
 }
 
-/* Last item no border */
-nav ul li.dropdown .dropdown-content a:last-child {
-  border-bottom: none;
+.navbar li {
+  float: left;
+  position: relative;
 }
 
-/* Hover effect */
-nav ul li.dropdown .dropdown-content a:hover {
+.navbar li a,
+.dropbtn {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  background-color: #333;
+}
+
+.navbar li a:hover,
+.dropdown:hover .dropbtn {
   background-color: #555;
 }
 
-/* Images in dropdown */
-nav ul li.dropdown .dropdown-content img {
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  object-fit: cover;
+/* Dropdown container */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #444;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 100%;
+  left: 0;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-content a:hover {
+  background-color: #666;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
