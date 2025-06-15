@@ -21,17 +21,37 @@
 </head>
 <body>
   <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="bets_accumulator.html">Bets & Accumulator</a></li>
-        <li><a href="tips.html">Today's Tips</a></li>
-        <li><a href="results.html">Results</a></li>
-        <li><a href="tipster_profiles.html">Tipster_Profiles</a></li>
-      </ul>
-    </nav>
-  </header>
+  <nav class="navbar">
+    <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bets_accumulator.html">Bets & Accumulator</a></li>
+      <li><a href="tips.html">Today's Tips</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="tipster_profiles.html">Tipster Profiles</a></li>
+      <li class="dropdown">
+        <button class="dropbtn" onclick="toggleDropdown()">Select Tipster ▼</button>
+        <div class="dropdown-content" id="tipsterDropdown">
+          <a href="tipster_bio/bitwise81.html"><img src="images/tipsters/bitwise81.jpg" alt="Bitwise81" /> Bitwise81</a>
+          <a href="tipster_bio/patch36.html"><img src="images/tipsters/patch36.jpg" alt="Patch36" /> Patch36</a>
+          <a href="tipster_bio/echo161.html"><img src="images/tipsters/echo161.jpg" alt="Echo161" /> Echo161</a>
+          <a href="tipster_bio/core449.html"><img src="images/tipsters/core449.jpg" alt="Core449" /> Core449</a>
+          <a href="tipster_bio/fractal153.html"><img src="images/tipsters/fractal153.jpg" alt="Fractal153" /> Fractal153</a>
+          <a href="tipster_bio/nova98.html"><img src="images/tipsters/nova98.jpg" alt="Nova98" /> Nova98</a>
+          <a href="tipster_bio/byte10.html"><img src="images/tipsters/byte10.jpg" alt="Byte10" /> Byte10</a>
+          <a href="tipster_bio/grid56.html"><img src="images/tipsters/grid56.jpg" alt="Grid56" /> Grid56</a>
+          <a href="tipster_bio/cipher75.html"><img src="images/tipsters/cipher75.jpg" alt="Cipher75" /> Cipher75</a>
+          <a href="tipster_bio/prime51.html"><img src="images/tipsters/prime51.jpg" alt="Prime51" /> Prime51</a>
+          <a href="tipster_bio/shock109.html"><img src="images/tipsters/shock109.jpg" alt="Shock109" /> Shock109</a>
+          <a href="tipster_bio/max63.html"><img src="images/tipsters/max63.jpg" alt="Max63" /> Max63</a>
+          <a href="tipster_bio/sneak9.html"><img src="images/tipsters/sneak9.jpg" alt="Sneak9" /> Sneak9</a>
+          <a href="tipster_bio/zebra37.html"><img src="images/tipsters/zebra37.jpg" alt="Zebra37" /> Zebra37</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
 
   <div class="page-banner" style="background-image: url('images/results-banner.jpg');">
     <h1>Race Results</h1>
@@ -59,6 +79,22 @@
     function loadResults(filename) {
       document.getElementById('results-frame').src = filename;
     }
+    function toggleDropdown() {
+      document.getElementById("tipsterDropdown").classList.toggle("show");
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById("navLinks").classList.toggle("mobile-show");
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        const dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+          dropdowns[i].classList.remove('show');
+        }
+      }
+    };
   </script>
 
 </body>
