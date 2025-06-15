@@ -22,19 +22,19 @@ header {
   padding: 10px 0;
 }
 
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 20px;
+/* Centered navbar */
+.navbar {
+  text-align: center;
 }
 
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   list-style: none;
+  margin: 0;
+  padding: 0;
   gap: 10px;
 }
 
@@ -95,9 +95,10 @@ header {
 /* JS controlled class */
 .show {
   display: flex !important;
+  flex-direction: column;
 }
 
-/* Hamburger */
+/* Hamburger Menu */
 .hamburger {
   display: none;
   background: none;
@@ -105,10 +106,15 @@ header {
   color: white;
   font-size: 24px;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 /* Mobile Styles */
 @media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
   .nav-links {
     display: none;
     flex-direction: column;
@@ -119,14 +125,6 @@ header {
 
   .nav-links.mobile-show {
     display: flex;
-  }
-  
-  .logo {
-    margin-bottom: 10px;
-  }
-  
-  .hamburger {
-    display: block;
   }
 }
 
