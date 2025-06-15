@@ -27,16 +27,26 @@
 
 
   <main>
-    <h2>📊 Results & Summaries</h2>
+    <label for="day-select">Choose a date to view tips:</label>
+    <select id="day-select" onchange="loadTips(this.value)">
+      <option value="tips/tips_2025-06-10.html">June 10, 2025</option>
+      <option value="tips/tips_2025-06-11.html">June 11, 2025</option>
+      <option value="tips/tips_2025-06-12.html">June 12, 2025</option>
+      <!-- Add more options as needed -->
+    </select>
 
-   
-   <p>Below you'll find historical summaries, winning percentages, graphs, and performance analysis of our daily tips.</p>
-
-    <!-- Future dynamic table/graph content will go here -->
+    <iframe id="tips-frame" src="tips/tips_2025-06-10.html"></iframe>
   </main>
 
   <footer>
     <p>&copy; 2025 Horse Racing Tips</p>
   </footer>
+
+  <script>
+    function loadTips(filename) {
+      document.getElementById('tips-frame').src = filename;
+    }
+  </script>
+
 </body>
 </html>
