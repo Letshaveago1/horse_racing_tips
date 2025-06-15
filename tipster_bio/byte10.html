@@ -48,7 +48,6 @@
       100% { box-shadow: 0 0 0px #00f0ff; }
     }
 
-    /* Nav buttons */
     .nav-buttons {
       margin-top: 2rem;
       display: flex;
@@ -71,28 +70,26 @@
 
     @media (max-width: 768px) {
       .nav-buttons {
-        display: none; /* hide buttons on mobile, use swipe instead */
+        display: none;
       }
     }
   </style>
 </head>
 <body>
   <div class="tipster-card" id="profile-card">
-    <img src="../images/tipsters/byte10.jpg" alt="byte10">
-    <h1>Bitwise81</h
-    <p><em>Precise, logical decision-maker</em></p>
+    <img src="../images/tipsters/byte10.jpg" alt="Byte10">
+    <h1>Byte10</h1>
+    <p><em>Fast-reacting and data-hungry, great for volatile races</em></p>
     <div>
-      <span class="badge">🔥 +50 Units</span>
-      <span class="badge">🏆 24% Win Rate</span>
-      <span class="badge">🎯 Accuracy Bias</span>
+      <span class="badge">🔥 +32 Units</span>
+      <span class="badge">🏆 18% Win Rate</span>
+      <span class="badge">⚡ Speed Bias</span>
     </div>
     <p style="margin-top: 1rem;">
-      Bitwise81 has consistently delivered strong metrics through binary logic and pattern analysis.
-      Great for accumulator anchors.
+      Byte10 specializes in speed metrics and reacts well to pace changes. Ideal for high-variance races or when seeking explosive outsiders with upside potential.
     </p>
   </div>
 
-  <!-- Desktop nav buttons -->
   <div class="nav-buttons">
     <a id="prevBtn" href="#">← Previous</a>
     <a id="nextBtn" href="#">Next →</a>
@@ -105,8 +102,7 @@
     ];
 
     function getCurrentTipster() {
-      const filename = window.location.pathname.split("/").pop().replace(".html", "").toLowerCase();
-      return filename;
+      return window.location.pathname.split("/").pop().replace(".html", "").toLowerCase();
     }
 
     function navigateTo(direction) {
@@ -114,15 +110,11 @@
       const index = tipsters.indexOf(current);
       if (index === -1) return;
 
-      let newIndex;
-      if (direction === "next") {
-        newIndex = (index + 1) % tipsters.length;
-      } else {
-        newIndex = (index - 1 + tipsters.length) % tipsters.length;
-      }
+      const newIndex = direction === "next"
+        ? (index + 1) % tipsters.length
+        : (index - 1 + tipsters.length) % tipsters.length;
 
-      const nextPage = tipsters[newIndex] + ".html";
-      window.location.href = nextPage;
+      window.location.href = tipsters[newIndex] + ".html";
     }
 
     document.getElementById("prevBtn").addEventListener("click", e => {
@@ -134,25 +126,20 @@
       navigateTo("next");
     });
 
-    // Keyboard support
     document.addEventListener("keydown", e => {
       if (e.key === "ArrowRight") navigateTo("next");
       if (e.key === "ArrowLeft") navigateTo("prev");
     });
 
-    // Swipe detection
     let startX = 0;
-    let endX = 0;
-    const threshold = 50;
-
     document.addEventListener("touchstart", e => {
       startX = e.touches[0].clientX;
     });
 
     document.addEventListener("touchend", e => {
-      endX = e.changedTouches[0].clientX;
-      if (startX - endX > threshold) navigateTo("next");
-      if (endX - startX > threshold) navigateTo("prev");
+      const endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) navigateTo("next");
+      if (endX - startX > 50) navigateTo("prev");
     });
   </script>
 </body>
