@@ -3,21 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Top Metric Selections</title>
+  <title>Today's Tips</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    label, select {
-      font-size: 1.1em;
-      margin: 15px 10px;
-    }
-
-    #tips-frame {
-      width: 100%;
-      height: 85vh;
-      border: none;
-      margin-top: 20px;
-    }
-  </style>
 </head>
 <body>
 
@@ -39,15 +26,10 @@
   </div>
 
   <main>
-    <label for="day-select">Choose a date to view tips:</label>
-    <select id="day-select" onchange="loadTips(this.value)">
-      <option value="tips/tips_2025-06-10.html">June 10, 2025</option>
-      <option value="tips/tips_2025-06-11.html">June 11, 2025</option>
-      <option value="tips/tips_2025-06-12.html">June 12, 2025</option>
-      <!-- Add more options as needed -->
-    </select>
+    <p>Below are today's top selections generated using our AI models and smart scoring system:</p>
 
-    <iframe id="tips-frame" src="tips/tips_2025-06-10.html"></iframe>
+    <!-- ✅ Dynamic data from Google Apps Script appears here -->
+    <div id="gdrive-data"></div>
   </main>
 
   <footer>
@@ -55,9 +37,50 @@
   </footer>
 
   <script>
-    function loadTips(filename) {
-      document.getElementById('tips-frame').src = filename;
-    }
+    fetch('https://script.google.com/macros/s/AKfycbxRHcIVAOp4oBNA1BgJsdCVE8cW5DbYOETpuU3e9sG38psRHHKGPoVrqh8ucl71TMYR/exec')
+      .then(response => response.json())
+      .then(data => {
+        const headers = [
+          "🔥 Confidence",
+          "📍 Course",
+          "⏰ Off Time",
+          "🏇 Horse",
+          "💰 Odds",
+          "🏁 Result",
+          "💵 Profit",
+          "📊 Super Score",
+          "📈 Weighted Score",
+          "🎯 Rank"
+        ];
+
+        let output = '<table border="1"><tr>';
+        headers.forEach(h => output += `<th>${h}</th>`);
+        output += '</tr>';
+
+        data.slice(1).forEach(row => {
+          output += '<tr>';
+          headers.forEach((h, i) => {
+            let cell = row[i];
+
+            if (i === 0) {
+              const color =
+                cell === "Strong" ? "#c8e6c9" :
+                cell === "Medium" ? "#fff9c4" :
+                "#ffe0b2";
+              cell = `<span style="background-color:${color}; padding:4px; border-radius:4px;">${cell}</span>`;
+            }
+
+            output += `<td>${cell}</td>`;
+          });
+          output += '</tr>';
+        });
+
+        output += '</table>';
+        document.getElementById('gdrive-data').innerHTML = output;
+      })
+      .catch(error => {
+        document.getElementById('gdrive-data').textContent = 'Failed to load data: ' + error;
+      });
   </script>
 
 </body>
