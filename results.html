@@ -46,7 +46,22 @@
       <!-- Add more options as needed -->
     </select>
 
-    <iframe id="results-frame" src="tips/results_2025-06-10.html"></iframe>
+   <iframe id="results-frame"></iframe>
+
+<script>
+  function loadResults(filename) {
+    document.getElementById('results-frame').src = filename;
+  }
+
+  // Load the first option by default
+  window.addEventListener('DOMContentLoaded', () => {
+    const select = document.getElementById('result-day-select');
+    if (select && select.value) {
+      loadResults(select.value);
+    }
+  });
+</script>
+
   </main>
 
   <footer>
